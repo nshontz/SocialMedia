@@ -1,0 +1,97 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+// Global
+.page-title {
+  text-align: center;
+  padding: 1em;
+  //background-color: $body-bg;
+  border-bottom: 2px solid $body-bg;
+}
+
+// Profile
+.fusion-wrapper {
+  display: flex;
+  margin: 0 134px 0 134px;
+}
+
+#profile-header,
+#profile-body {
+  padding: 4em 1em;
+}
+
+#profile-header {
+  width: 30%;
+  border-right: 2px solid $body-bg;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 1em;
+  }
+
+  h4 {
+    font-size: 16px;
+
+  }
+}
+
+#avatar {
+  width: 10em;
+  height: 10em;
+  border: 3px solid #f8fafc;
+  border-radius: 50%;
+  margin-bottom: 1.5em;
+}
+
+#edit-btn {
+  color: white;
+  font-size: 12px;
+  background-color: $mainblue;
+  padding: 3px 8px;
+}
+
+#tabs-wrapper {
+  padding: 2em 2em;
+}
+
+.tab-button {
+  color: $darkgrey;
+  text-align: left;
+}
+
+#tab-items {
+  width: 5em;
+  border-bottom: 2px solid $lightgrey;
+  padding: .5em;
+  font-size: 20px;
+}
+
+#tab-items.active,
+#tab-items:hover {
+  border-bottom: 2px solid $mainblue;
+  cursor: pointer;
+}
+
+.tab-body {
+  padding-top: 1em;
+}
