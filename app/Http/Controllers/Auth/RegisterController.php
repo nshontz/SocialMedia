@@ -64,15 +64,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $id = uniqid();
+
         Profile::create([
-            'user_id' => uniqid(),
-            'name' => $data['name']
+            'user_id' => $id,
+            'first_name' => $data['name']
         ]);
 
         return User::create([
+            'id' => $id,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'created_at' => date("Y-m-d H:i:s")
         ]);
     }
 }

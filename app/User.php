@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use App\Project;
 
 class User extends Authenticatable
 {
@@ -17,8 +18,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'users_id','name', 'email', 'password',
     ];
+
+    public $primaryKey = 'users_id';
+    public $incrementing = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -30,4 +34,11 @@ class User extends Authenticatable
     ];
 
     use HasApiTokens, Notifiable;
+
+//    public function projects() // display the user
+//    {
+////        return $this->belongsToMany('App\Project', 'user_project');
+//        return $this->hasMany('App\Project');
+////        return $this->belongsTo('App\User');
+//    }
 }

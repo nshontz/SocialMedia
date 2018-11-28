@@ -11,13 +11,16 @@
                     <p> {{ project.description }} </p>
                     </div>
                     <div>
-                    <span class="badge badge-light badge-pill">{{ project.skill }}</span>
-                    <span class="badge badge-info badge-pill">{{ project.type }}</span>
-                    <span class="badge badge-dark badge-pill">{{ project.stage }}</span>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" @click="getProject(project.project_key)" data-toggle="modal" data-target="#exampleModal">
+                            View
+                        </button>
                     </div>
                 </li>
             </ul>
         </div>
+
+    <project-detail v-bind:activeProject="activeProject"></project-detail>
     </section>
     <aside>
         <form class="form-group">
@@ -36,11 +39,11 @@
         </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Post a Project</h5>
+                            <h5 class="modal-title" id="exampleModalLabel2">Post a Project</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -94,6 +97,19 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4" v-if="type === 'Mobile app'">
+                                        <label for="inputTech">Technologies</label>
+                                        <select id="inputTech" class="form-control" >
+                                            <option selected>Choose...</option>
+                                            <option>Swift</option>
+                                            <option>Object-C</option>
+                                            <option>Coltin</option>
+                                            <option>Java</option>
+                                        </select>
+                                    </div>
+
+                                </div>
 
                                 <div class="form-row">
                                 <div class="input-group mb-3">
@@ -123,6 +139,7 @@
 
 <script>
     import axios from 'axios'
+    import projectDetail from './project-detail.vue'
 
     export default {
         name: "Project",
@@ -134,22 +151,32 @@
                 type: 'Choose...',
                 stage: 'Choose...',
                 repository: '',
-                description: ''
+                description: '',
+                activeProject: null
             }
         },
         created() {
+          //   let self = this;
+          // axios.get('/api/project').then(function (response) {
+          //    self.projects = response.data;
+          // });
+
             let self = this;
-          axios.get('/api/project').then(function (response) {
-             self.projects = response.data;
-          });
+            axios.get('/api/project').then(function (response) {
+                self.projects = response.data;
+            });
         },
         methods: {
             createProject() {
                 axios.post('/api/project', this.$data).then(response => {
                     console.log('data posted');
                 });
+            },
+            getProject(key) {
+                this.activeProject = this.projects.filter(project => project.project_key === key);
             }
-        }
+        },
+        components: {projectDetail}
     }
 </script>
 

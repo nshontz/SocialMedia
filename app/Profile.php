@@ -12,14 +12,14 @@ class Profile extends Model
     {
         DB::table('profiles')->insert([
             'image_path' => null,
-            'user_id' => $ary['user_id'],
-            'first_name' => $ary['name']
+            'id' => $ary['user_id'],
+            'first_name' => $ary['first_name']
         ]);
     }
 
-    public function get()
+    public static function get($id)
     {
-        return DB::table('profiles')->where('first_name', '=', 'Tianni')->first();
+        return DB::table('profiles')->where('id', '=', $id)->first();
 
     }
 
@@ -32,8 +32,8 @@ class Profile extends Model
             'city' => $data["city"],
             'state' => $data['state'],
             'zip_code' => $data["zipcode"],
-            'bio' => $data["bio"]
-//            'updated_at'=> date('m-d-Y:h:i:s', time())
+            'bio' => $data["bio"],
+            'updated_at'=> date("Y-m-d H:i:s")
         ]);
 
     }
@@ -50,5 +50,4 @@ class Profile extends Model
     {
         return DB::table('profiles')->where('first_name', '=', $name)->value('image_path');
     }
-
 }

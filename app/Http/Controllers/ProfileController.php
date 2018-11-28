@@ -7,13 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 use App\Profile;
-
+use App\Users;
 
 class ProfileController extends Controller
 {
-    public function fetch(Profile $profile)
+    public function fetch()
     {
-        return response()->json($profile->get(), 200);
+//        return response()->json(Profile::get(Auth::id()), 200);
+//        User::find(Auth::id())->with('project');
+        $data = Users::find(Auth::user()->users_id)->projects;
+//        $data = Users::with('projects')->get();
+        return response()->json($data, 200);
+
     }
 
     public function update(Request $request)
@@ -41,3 +46,6 @@ class ProfileController extends Controller
         response()->json(['success' => 'success'], 200);
     }
 }
+
+//return response()->json(Users::with('projects')->get(), 200); Users model w/ projects
+
